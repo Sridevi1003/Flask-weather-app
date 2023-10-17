@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+
+      body {
+        background-color: #D2CDEA ;
+      }
+
+      .header-bg {
+        background-color: white;
+        color: purple;
+        padding: 5px;
+      }
+      .cloudy-bg {
+        background-color: #B3B9B9;
+      }
+      .sunny-bg {
+        background-color: #E6ECBD;
+      }
+      .rainy-bg {
+        background-color: #BCF0EB ;
+      }
+    </style>
+
+    <title>5-Day Weather Forecast</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="header-bg">
+      <h1>5-Day Weather Forecast for {{ city }}</h1>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Date and Time</th>
+            <th>Temperature (°C)</th>
+            <th>Weather Condition</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for entry in forecast %}
+            <tr class="{% if 'clouds' in entry.weather_description %}cloudy-bg{% elif 'clear' in entry.weather_description %}sunny-bg{% else %}rainy-bg{% endif %}">
+              <td>{{ entry.timestamp }}</td>
+              <td>{{ entry.temperature }}</td>
+              <td>{{ entry.weather_description }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
